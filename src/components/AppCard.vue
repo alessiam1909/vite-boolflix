@@ -19,6 +19,7 @@ export default {
         <p> Titolo originale: {{card.original_title}}</p>
         <p> Voto: {{card.vote_average}}</p>
         <p> Lingua originale: {{card.original_language}}</p>
+        <img :src="`https://www.countryflagicons.com/FLAT/64/${card.original_language.toUpperCase()}.png`" >
     </div>
 </template>
 
