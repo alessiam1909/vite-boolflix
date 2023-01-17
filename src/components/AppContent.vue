@@ -37,12 +37,26 @@ export default {
             <p>Sono presenti {{store.movieList.length}} film</p>
         </div>
         <div class="row-film">
-            <AppCard v-for="(item, index) in store.movieList" :key="index" :card="item"/>
+            <AppCard v-for="(item, index) in store.movieList" :key="index" :card="item" class="card"/>
         </div>
         
     </div>
 </template>
 
 <style lang="scss">
+
+    .container{
+        width: 90%;
+        margin: 0 auto;
+
+        .row-film{
+            display: flex;
+            flex-wrap: wrap;
+
+            .card{
+                width: calc(100% / 5);
+            }
+        }
+    }
     
 </style>
