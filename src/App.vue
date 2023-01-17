@@ -1,14 +1,13 @@
 <script>
 import AppHeader from './components/AppHeader.vue'
 import AppContent from './components/AppContent.vue'
-import AppCard from './components/AppCard.vue'
+
 import { store } from './store.js';
 
 export default{
   components: {
     AppHeader,
     AppContent,
-    AppCard
   },
   data(){
     return{
@@ -23,7 +22,7 @@ export default{
   <div>
     <AppHeader/>
     <AppContent/>
-    <AppCard/>
+    
   </div>
 </template>
 
