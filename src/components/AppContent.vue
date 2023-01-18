@@ -1,25 +1,36 @@
 <script>
 import { store } from '../store.js'
 import AppCard from './AppCard.vue'
+import AppSerie from './AppSerie.vue'
 import axios from 'axios'
 export default {
     components :{
-        AppCard
+        AppCard,
+        AppSerie
     },
     data(){
         return{
             store,
-            cercaFilm :'',
+            cerca :'',
         }
     },
     
     methods:{
-        ricercaFilm(input){
-            let api = store.apiMovie + input;
+        ricercaFilm(cerca){
+            let api = `${store.apiMovie}${store.api_key}${cerca}`;
             axios.get(api).then((response => {
                 store.movieList = response.data.results
             }))
-
+        },
+        ricercaSerie(cerca){
+            let apiSerie = `${store.apiSerie}${store.api_key}${cerca}`;
+            axios.get(apiSerie).then((response => {
+                store.serieList = response.data.results
+            }))
+        },
+        ricercaTutto(cerca){
+            this.ricercaSerie(cerca);
+            this.ricercaFilm(cerca);
         }
     }
 }
@@ -29,8 +40,8 @@ export default {
     <div class="container">
         <div class="row">
             <div class="form">
-                <input type="search" placeholder="Cerca il tuo film o serie" v-model="cercaFilm" @keyup.enter="ricercaFilm(cercaFilm)">
-                <button @click="ricercaFilm(cercaFilm)">Cerca</button>
+                <input type="search" placeholder="Cerca il tuo film o serie" v-model="cerca" @keyup.enter="ricercaTutto(cerca)">
+                <button @click="ricercaTutto(cerca)">Cerca</button>
             </div>
         </div>
         <div class="film-trovati">
@@ -38,6 +49,7 @@ export default {
         </div>
         <div class="row-film">
             <AppCard v-for="(item, index) in store.movieList" :key="index" :card="item" class="card"/>
+            <AppSerie v-for="(item, index) in store.serieList" :key="index" :cardSerie="item" class="card"/>
         </div>
         
     </div>
