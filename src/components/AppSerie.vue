@@ -20,6 +20,13 @@ export default {
             }
 
             return flags
+        },
+        imageEmpty(){
+            if (this.cardSerie.poster_path != null){
+                return `https://image.tmdb.org/t/p/w342/${(this.cardSerie.poster_path)}`
+            } else{
+                return "https://vignette.wikia.nocookie.net/hellsing/images/2/26/Immagine_non_disponibile.jpg/revision/latest?cb=20150610113249&path-prefix=it"
+            }
         }
     }
 }
@@ -27,11 +34,15 @@ export default {
 
 <template lang="">
     <div class="card">
-        <img :src="`https://image.tmdb.org/t/p/w342/${(cardSerie.poster_path)}`" :alt="cardSerie.name" class="img-card">
+        <img :src="imageEmpty()" :alt="cardSerie.name" class="img-card">
         <div class="info">
             <h4>{{cardSerie.name}}</h4>
             <p> Titolo originale serie: {{cardSerie.original_name}}</p>
-            <p> Voto: {{cardSerie.vote_average}}</p>
+            <div> 
+                <span>Voto: </span>
+                <i class="fa-solid fa-star stella-piena"  v-for="(item, index) in Math.floor(cardSerie.vote_average / 2)" ></i>
+                <i class="fa-regular fa-star stella-vuota"  v-for="(item, index) in (5 - Math.floor(cardSerie.vote_average / 2))" ></i>
+            </div>
             <p> Lingua originale: {{cardSerie.original_language}}</p>
             <img :src="getFlags()" >
         </div>
@@ -39,6 +50,7 @@ export default {
 </template>
 
 <style lang="scss">
+    @use '../styles/generals.scss' as *;
     @use '../styles/partials/variables' as *; 
     @use '../styles/partials/mixins' as *; 
 
@@ -97,6 +109,10 @@ export default {
         opacity: 0;
         transform: translateY(30px);
         transition: 0.5s;
+
+        .stella-piena, .stella-vuota{
+                color: rgb(255, 238, 5);
+            }
     }
 }
 </style>
