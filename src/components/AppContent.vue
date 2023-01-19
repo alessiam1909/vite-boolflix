@@ -54,11 +54,17 @@ export default {
 <template lang="">
     <div class="container-card">
         <AppHeader @search="ricercaTutto" @cerca="elementiIniziali()"/>
+        <div class="film-popolari">
+            <p>Sono presenti {{store.popolari.length}} Titoli Popolari</p>
+        </div>
+        <div class="row-popolari">
+            <AppPopolari  v-for="(item, index) in store.popolari" :key="index" :cardPopolari="item" class="card"/>
+            
+        </div>
         <div class="film-trovati">
             <p>Sono presenti {{store.movieList.length}} Film e {{store.serieList.length}} Serie Tv</p>
         </div>
         <div class="row-film">
-            <AppPopolari  v-for="(item, index) in store.popolari" :key="index" :cardPopolari="item" class="card"/>
             <AppCard v-for="(item, index) in store.movieList" :key="index" :card="item" class="card"/>
             <AppSerie v-for="(item, index) in store.serieList" :key="index" :cardSerie="item" class="card"/>
         </div>
@@ -70,9 +76,18 @@ export default {
 
     .container-card{
         width: 100%;
-        .film-trovati{
+        .film-trovati, .film-popolari{
             text-align: center;
             margin: 30px 0;
+        }
+
+        .row-popolari{
+            display: flex;
+            overflow-x: auto;
+
+           .card{
+            min-width: 300px;
+           }
         }
 
         .row-film{
