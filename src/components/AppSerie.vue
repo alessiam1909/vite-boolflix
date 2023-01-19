@@ -29,6 +29,13 @@ export default {
             } else{
                 return "https://vignette.wikia.nocookie.net/hellsing/images/2/26/Immagine_non_disponibile.jpg/revision/latest?cb=20150610113249&path-prefix=it"
             }
+        },
+        titleEmpty(){
+            if (this.cardSerie.original_name != null){
+                return `Titolo originale: ${this.cardSerie.original_name}`
+            } else{
+                return ''
+            }
         }
     }
 }
@@ -39,7 +46,7 @@ export default {
         <img :src="imageEmpty()" :alt="cardSerie.name" class="img-card">
         <div class="info">
             <h4>{{cardSerie.name}}</h4>
-            <p> Titolo originale serie: {{cardSerie.original_name}}</p>
+            <p> {{titleEmpty()}}</p>
             <div> 
                 <span>Voto: </span>
                 <i class="fa-solid fa-star stella-piena"  v-for="(item, index) in Math.floor(cardSerie.vote_average / 2)" ></i>

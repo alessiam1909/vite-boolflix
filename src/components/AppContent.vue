@@ -55,17 +55,21 @@ export default {
     <div class="container-card">
         <AppHeader @search="ricercaTutto" @cerca="elementiIniziali()"/>
         <div class="film-popolari">
-            <p>Sono presenti {{store.popolari.length}} Titoli Popolari</p>
+            <p>CONSIGLIATI DA BOOLFLIX: </p>
         </div>
         <div class="row-popolari">
             <AppPopolari  v-for="(item, index) in store.popolari" :key="index" :cardPopolari="item" class="card"/>
-            
         </div>
         <div class="film-trovati">
-            <p>Sono presenti {{store.movieList.length}} Film e {{store.serieList.length}} Serie Tv</p>
+            <p>ABBIAMO TROVATO {{store.movieList.length}} FILM IN BASE ALLA TUA RICERCA</p>
         </div>
         <div class="row-film">
             <AppCard v-for="(item, index) in store.movieList" :key="index" :card="item" class="card"/>
+        </div>
+        <div class="serie-trovati">
+            <p>ABBIAMO TROVATO {{store.serieList.length}} SERIE TV IN BASE ALLA TUA RICERCA</p>
+        </div>
+        <div class="row-serie">
             <AppSerie v-for="(item, index) in store.serieList" :key="index" :cardSerie="item" class="card"/>
         </div>
         
@@ -76,14 +80,22 @@ export default {
 
     .container-card{
         width: 100%;
-        .film-trovati, .film-popolari{
+        .film-trovati, .film-popolari, .serie-trovati{
             text-align: center;
+            font-size: 25px;
+            color:rgb(145, 143, 143) ;
             margin: 30px 0;
+
+            &:hover{
+                color: white;
+            }
         }
 
         .row-popolari{
             display: flex;
+            height: 600px;
             overflow-x: auto;
+           
 
            .card{
             min-width: 300px;
@@ -93,7 +105,20 @@ export default {
         .row-film{
             display: flex;
             overflow-x: auto;
+            height: 600px;
 
+           .card{
+            min-width: 300px;
+           }
+        }
+
+        .row-serie{
+            display: flex;
+            overflow-x: auto;
+            height: 600px;
+            margin-bottom: 100px;
+            
+            
            .card{
             min-width: 300px;
            }

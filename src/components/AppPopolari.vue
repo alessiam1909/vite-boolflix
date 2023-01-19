@@ -28,6 +28,13 @@ export default {
             } else{
                 return "https://vignette.wikia.nocookie.net/hellsing/images/2/26/Immagine_non_disponibile.jpg/revision/latest?cb=20150610113249&path-prefix=it"
             }
+        },
+        titleEmpty(){
+            if (this.cardPopolari.original_name || this.cardPopolari.original_title != null){
+                return `Titolo originale: ${this.cardPopolari.original_name || this.cardPopolari.original_title}`
+            } else{
+                return 'Titolo assente'
+            }
         }
     }
 }
@@ -37,8 +44,8 @@ export default {
     <div class="card">
         <img :src="imageEmpty()" :alt="cardPopolari.name" class="img-card">
         <div class="info">
-            <h4>{{cardPopolari.name}}</h4>
-            <p> Titolo originale film: {{cardPopolari.original_name}}</p>
+            <h4>{{cardPopolari.name || cardPopolari.title}}</h4>
+            <p> {{titleEmpty()}}</p>
             <div class="stelle"> 
                 <span>Voto: </span>
                 <i class="fa-solid fa-star stella-piena"  v-for="(item, index) in Math.floor(cardPopolari.vote_average / 2)" ></i>
