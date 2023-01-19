@@ -2,7 +2,7 @@
 import { store } from '../store';
 export default {
     props:{
-       card : Object 
+       cardPopolari : Object 
     },
     data(){
         return{
@@ -11,20 +11,20 @@ export default {
     },
     methods:{
         getFlags(){
-            let flags = `https://www.countryflagicons.com/FLAT/64/${this.card.original_language.toUpperCase()}.png`
-            if ( this.card.original_language == "en"){
-                this.card.original_language = "gb"
-            } else if (this.card.original_language == "ja"){
-                this.card.original_language = "jp"
-            }else if (this.card.original_language == "ko"){
-                this.card.original_language = "kr"
+            let flags = `https://www.countryflagicons.com/FLAT/64/${this.cardPopolari.original_language.toUpperCase()}.png`
+            if ( this.cardPopolari.original_language == "en"){
+                this.cardPopolari.original_language = "gb"
+            } else if (this.cardPopolari.original_language == "ja"){
+                this.cardPopolari.original_language = "jp"
+            }else if (this.cardPopolari.original_language == "ko"){
+                this.cardPopolari.original_language = "kr"
             }
 
             return flags
         },
         imageEmpty(){
-            if (this.card.poster_path != null){
-                return `https://image.tmdb.org/t/p/w342/${(this.card.poster_path)}`
+            if (this.cardPopolari.poster_path != null){
+                return `https://image.tmdb.org/t/p/w342/${(this.cardPopolari.poster_path)}`
             } else{
                 return "https://vignette.wikia.nocookie.net/hellsing/images/2/26/Immagine_non_disponibile.jpg/revision/latest?cb=20150610113249&path-prefix=it"
             }
@@ -35,16 +35,16 @@ export default {
 
 <template lang="">
     <div class="card">
-        <img :src="imageEmpty()" :alt="card.title" class="img-card">
+        <img :src="imageEmpty()" :alt="cardPopolari.name" class="img-card">
         <div class="info">
-            <h4>{{card.title}}</h4>
-            <p> Titolo originale film: {{card.original_title}}</p>
+            <h4>{{cardPopolari.name}}</h4>
+            <p> Titolo originale film: {{cardPopolari.original_name}}</p>
             <div class="stelle"> 
                 <span>Voto: </span>
-                <i class="fa-solid fa-star stella-piena"  v-for="(item, index) in Math.floor(card.vote_average / 2)" ></i>
-                <i class="fa-regular fa-star stella-vuota"  v-for="(item, index) in (5 - Math.floor(card.vote_average / 2))" ></i>
+                <i class="fa-solid fa-star stella-piena"  v-for="(item, index) in Math.floor(cardPopolari.vote_average / 2)" ></i>
+                <i class="fa-regular fa-star stella-vuota"  v-for="(item, index) in (5 - Math.floor(cardPopolari.vote_average / 2))" ></i>
             </div>
-            <p> Lingua originale: {{card.original_language}}</p>
+            <p> Lingua originale: {{cardPopolari.original_language}}</p>
             <img :src="getFlags()" >
         </div>
     </div>

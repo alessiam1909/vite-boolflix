@@ -7,5 +7,6 @@ export const store = reactive({
     apiFlags: 'https://countryflagsapi.com/png/ae',
     apiSerie: 'https://api.themoviedb.org/3/search/tv?',
     movieList: [],
-    serieList: []
+    serieList: [],
+    popolari: []
 });

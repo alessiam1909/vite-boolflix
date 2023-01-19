@@ -57,8 +57,6 @@ export default {
     @use '../styles/partials/mixins' as *; 
 
     .card{
-
-    min-width: 280px;
     border-radius: 15px;
     padding: 1em;
     margin: 1em;

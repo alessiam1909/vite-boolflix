@@ -1,12 +1,10 @@
 <script>
-import AppHeader from './components/AppHeader.vue'
 import AppContent from './components/AppContent.vue'
 
 import { store } from './store.js';
 
 export default{
   components: {
-    AppHeader,
     AppContent,
   },
   data(){
@@ -20,7 +18,6 @@ export default{
 
 <template>
   <div>
-    <AppHeader/>
     <AppContent/>
     
   </div>

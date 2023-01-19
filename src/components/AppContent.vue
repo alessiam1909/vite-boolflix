@@ -1,17 +1,21 @@
 <script>
 import { store } from '../store.js'
 import AppCard from './AppCard.vue'
+import AppPopolari from './AppPopolari.vue'
+import AppHeader from './AppHeader.vue'
 import AppSerie from './AppSerie.vue'
 import axios from 'axios'
 export default {
     components :{
         AppCard,
-        AppSerie
+        AppSerie,
+        AppHeader,
+        AppPopolari
     },
     data(){
         return{
             store,
-            cerca :'',
+            cerca: ''
         }
     },
     
@@ -31,23 +35,27 @@ export default {
         ricercaTutto(cerca){
             this.ricercaSerie(cerca);
             this.ricercaFilm(cerca);
+        },
+        elementiIniziali(){
+            if (this.cerca == ''){
+                axios.get('https://api.themoviedb.org/3/trending/all/day?api_key=dfa9f536819a6b4a63a7a0aee00d2462').then((response) => {
+                    store.popolari = response.data.results
+                    
+                })
+            }
         }
     }
 }
 </script>
 
 <template lang="">
-    <div class="container">
-        <div class="row">
-            <div class="form">
-                <input type="search" placeholder="Cerca il tuo film o serie" v-model="cerca" @keyup.enter="ricercaTutto(cerca)">
-                <button @click="ricercaTutto(cerca)">Cerca</button>
-            </div>
-        </div>
+    <div class="container-card">
+        <AppHeader @search="ricercaTutto" @cerca="elementiIniziali()"/>
         <div class="film-trovati">
-            <p>Sono presenti {{store.movieList.length}} film</p>
+            <p>Sono presenti {{store.movieList.length}} Film e {{store.serieList.length}} Serie Tv</p>
         </div>
         <div class="row-film">
+            <AppPopolari  v-for="(item, index) in store.popolari" :key="index" :cardPopolari="item" class="card"/>
             <AppCard v-for="(item, index) in store.movieList" :key="index" :card="item" class="card"/>
             <AppSerie v-for="(item, index) in store.serieList" :key="index" :cardSerie="item" class="card"/>
         </div>
@@ -57,17 +65,20 @@ export default {
 
 <style lang="scss">
 
-    .container{
-        width: 90%;
-        margin: 0 auto;
+    .container-card{
+        width: 100%;
+        .film-trovati{
+            text-align: center;
+            margin: 30px 0;
+        }
 
         .row-film{
             display: flex;
             overflow-x: auto;
 
-            .card{
-                width: calc(100% / 5);
-            }
+           .card{
+            min-width: 300px;
+           }
         }
     }
     
