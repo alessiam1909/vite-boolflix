@@ -107,6 +107,7 @@ export default {
         z-index: 3;
         color: white;
         opacity: 0;
+        padding-top: 300px;
         transform: translateY(30px);
         transition: 0.5s;
 

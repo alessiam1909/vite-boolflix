@@ -103,7 +103,7 @@ export default {
         }
         .info {
             position: relative;
-            top: 60%;
+            padding-top: 300px;
             z-index: 3;
             color: white;
             opacity: 0;
