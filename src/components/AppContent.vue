@@ -63,7 +63,7 @@ export default {
 
         .row-film{
             display: flex;
-            flex-wrap: wrap;
+            overflow-x: auto;
 
             .card{
                 width: calc(100% / 5);

@@ -17,6 +17,8 @@ export default {
                 this.cardSerie.original_language = "gb"
             } else if (this.cardSerie.original_language == "ja"){
                 this.cardSerie.original_language = "jp"
+            }else if (this.cardSerie.original_language == "ko"){
+                this.cardSerie.original_language = "kr"
             }
 
             return flags
