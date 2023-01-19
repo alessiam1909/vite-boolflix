@@ -12,7 +12,6 @@ export default {
         ricerca(){
             console.log(this.cerca)
             this.$emit('search', this.cerca)
-            this.$emit('cerca', this.cerca)
         },
         
     }

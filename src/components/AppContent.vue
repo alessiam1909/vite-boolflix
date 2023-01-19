@@ -18,6 +18,9 @@ export default {
             cerca: ''
         }
     },
+    created(){
+        this.elementiIniziali()
+    },
     
     methods:{
         ricercaFilm(cerca){
